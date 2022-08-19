@@ -16,21 +16,17 @@ app.get('/', (req, res)=>{
     res.send("Welcome Home")
 })
 
-app.get('/products', (req, res)=>{
+app.get('/products', async (req, res)=> {
     try {
-        const products = await Product.find({});
-
-        res.json(products)
+        res.json(await Product.find({}))
     } catch (error) {
-        console.error("Found Error")
-        res.status(500).json({message: "Server Error"})
+        res.status(400).json(error)
     }
 })
-app.get('/products/:id', (req, res)=> {
-    try {
-        const product = await Product.findById(req.params.id);
 
-        res.json(product)
+app.get('/products/:id', async (req, res)=> {
+    try {
+        res.json(await Product.findById(req.params.id))
     } catch (error) {
         console.error("Found Error")
         res.status(500).json({message: "Server Error"})
