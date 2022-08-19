@@ -11,14 +11,16 @@ app.use(cors())
 app.use(express.json());
 
 
+app.get('/', (req, res)=>{
+    res.send("Welcome Home")
+})
+
 app.use('/products', productRoute)
 
 
 connectDB();
 
 
-app.get('/', (req, res)=>{
-    res.send("Welcome Home")
-})
+
 
 app.listen(PORT, ()=>console.log(`Listening on port ${PORT}`))
