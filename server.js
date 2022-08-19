@@ -19,6 +19,7 @@ app.get('/', (req, res)=>{
 app.get('/products', async (req, res)=> {
     try {
         res.json(await Product.find({}))
+        console.log("This is the home page")
     } catch (error) {
         res.status(400).json(error)
     }
