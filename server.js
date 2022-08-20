@@ -5,13 +5,14 @@ const PORT = process.env.PORT
 const cors = require('cors')
 const Product = require('./models/Product')
 const mongoose = require('mongoose')
+const DATA_BASE_URL = process.env.MONGO_URL
 
 
 
 app.use(cors())
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect(DATA_BASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -55,5 +56,5 @@ app.get('/products/:id', async (req, res)=> {
 
 
 
-
+console.log(process.env.MONGO_URL)
 app.listen(PORT, ()=>console.log(`Listening on port ${PORT}`))
