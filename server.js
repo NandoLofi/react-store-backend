@@ -1,17 +1,19 @@
 const express = require('express');
-require('dotenv').config()
 const app = express();
-const PORT = process.env.PORT
+require('dotenv').config()
 const cors = require('cors')
 const Product = require('./models/Product')
 const mongoose = require('mongoose');
+const URL = process.env.DATABASE_URI
+const PORT = process.env.PORT
 
 
 
 app.use(cors())
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI, {
+//mongoose db connection
+mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -53,5 +55,5 @@ app.get('/products/:id', async (req, res)=> {
 
 
 
-console.log(typeof(DATA_BASE_URI))
+console.log(typeof(URL))
 app.listen(PORT, ()=>console.log(`Listening on port ${PORT}`))
