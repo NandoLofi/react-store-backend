@@ -1,19 +1,18 @@
 const express = require('express');
-const path = require('path')
-require('dotenv').config({path: path.resolve(__dirname, './.env')});
+require('dotenv').config()
 const app = express();
 const PORT = process.env.PORT
 const cors = require('cors')
 const Product = require('./models/Product')
-const mongoose = require('mongoose')
-const DATA_BASE_URL = process.env.MONGO_URL
+const mongoose = require('mongoose');
+const DATA_BASE_URI = process.env.MONGO_URI
 
 
 
 app.use(cors())
 app.use(express.json());
 
-mongoose.connect(DATA_BASE_URL, {
+mongoose.connect(DATA_BASE_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
@@ -55,7 +54,5 @@ app.get('/products/:id', async (req, res)=> {
 
 
 
-
-
-console.log(process.env.MONGO_URL)
+console.log(typeof(DATA_BASE_URI))
 app.listen(PORT, ()=>console.log(`Listening on port ${PORT}`))
