@@ -3,13 +3,28 @@ const { config } = require('dotenv');
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT
-const connectDB = require('./config/database')
 const cors = require('cors')
 const Product = require('./models/Product')
+const mongoose = require('mongoose')
 
 app.use(cors())
 app.use(express.json());
-connectDB();
+
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+
+mongoose.connection
+.on('open', ()=> console.log('MongoDB connected'))
+.on('close', ()=> console.log('MongoDB disconnected'))
+.on('error', ()=> console.log("Error"))
+
+
+
+
+
+
 
 
 app.get('/', (req, res)=>{
