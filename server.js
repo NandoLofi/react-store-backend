@@ -1,10 +1,11 @@
-require('dotenv').config();
+require('dotenv').config({path: ".env"});
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT
 const cors = require('cors')
 const Product = require('./models/Product')
 const mongoose = require('mongoose')
+
 
 app.use(cors())
 app.use(express.json());
